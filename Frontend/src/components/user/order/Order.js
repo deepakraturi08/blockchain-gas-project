@@ -4,6 +4,7 @@ import { useEffect, useState } from "react";
 import SimpleMap from "../../map/Simple";
 import AuthService from "../../../services/auth.service";
 import { getDistance } from "geolib";
+import Five from "../../../assets/images/five.jpg";
 
 function Order() {
   const [pointer, setPointer] = useState({
@@ -64,7 +65,7 @@ function Order() {
     <div
       className="w-screen h-screen flex flex-col justify-around items-center lg:md:flex-row"
       style={{
-        backgroundImage: `linear-gradient(45deg,rgba(0,0,0, 0.75),rgba(0,0,0, 0.75)),url(${LoginLight})`,
+        backgroundImage: `linear-gradient(45deg,rgba(0,0,0, 0.75),rgba(0,0,0, 0.75)),url(${Five})`,
         backgroundPosition: `50% 50%`,
         backgroundSize: `cover`,
         backgroundRepeat: "no-repeat",

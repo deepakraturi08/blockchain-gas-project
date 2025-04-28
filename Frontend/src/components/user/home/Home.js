@@ -5,30 +5,30 @@ import { Link, useNavigate } from "react-router-dom";
 import AuthService from "../../../services/auth.service";
 import { useEffect, useState } from "react";
 import SimpleMap from "../../map/Simple";
+import Seven from "../../../assets/images/seven.jpg";
 function Home() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const navigate = useNavigate();
   const user = AuthService.getCurrentUser();
-  const [name,setName] = useState("");
-  const [pointer,setPointer] = useState({})
+  const [name, setName] = useState("");
+  const [pointer, setPointer] = useState({});
   useEffect(() => {
     if (!user) {
       navigate("/user/auth/login");
     }
   }, [user]);
 
-
-  useEffect(()=>{
+  useEffect(() => {
     if (navigator.geolocation) {
-      navigator.geolocation.watchPosition(function(position) {
+      navigator.geolocation.watchPosition(function (position) {
         setPointer({
-          lat : position.coords.latitude,
-          lng : position.coords.longitude
-        })
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        });
       });
     }
-  },[])
+  }, []);
 
   const getResposne = async () => {
     try {
@@ -49,14 +49,13 @@ function Home() {
   useEffect(() => {
     getResposne();
   }, []);
-  
 
   return (
     <div
       className="w-screen h-screen flex items-center justify-center"
       style={{
-        backgroundImage: `linear-gradient(45deg,rgba(0,0,0, 0.75),rgba(0,0,0, 0.75)),url(${LoginLight})`,
-        backgroundPosition: `50% 50%`,
+        backgroundImage: `linear-gradient(45deg,rgba(0,0,0, 0.75),rgba(0,0,0, 0.75)),url(${Seven})`,
+        backgroundPosition: `50% 70%`,
         backgroundSize: `cover`,
         backgroundRepeat: "no-repeat",
       }}
@@ -71,7 +70,7 @@ function Home() {
             />
           ) : null}
         </div>
-         <div className="flex flex-row justify-evenly items-center  gap-5 lg:flex-row flex-wrap lg:gap-10 lg:w-[30%] ">
+        <div className="flex flex-row justify-evenly items-center  gap-5 lg:flex-row flex-wrap lg:gap-10 lg:w-[30%] ">
           <div className="text-white text-center text-[54px] flex flex-row justify-center items-center gap-3  whitespace-break-spaces font-sans  lg:text-[78px] md:text-[74px] ">
             <h1>{"Hey, " + name.split(" ")[0]}</h1>
           </div>
@@ -92,7 +91,7 @@ function Home() {
                 className="flex items-center justify-center  w-[200px] h-[100px] bg-gray-800 rounded-lg shadow hover:bg-[#fe6f2b]"
               >
                 <h5 className="mb-2 lg:text-2xl font-bold tracking-tight text-gray-900 dark:text-white">
-                  Order Fuel
+                  Order Gas
                 </h5>
               </Link>
             </div>
@@ -127,8 +126,8 @@ function Home() {
               </Link>
             </div>
           </div>
-        </div> 
         </div>
+      </div>
     </div>
   );
 }

@@ -7,25 +7,25 @@ import { BsFuelPump } from "react-icons/bs";
 import { useEffect, useState } from "react";
 import SimpleMap from "../../map/Simple";
 import authService from "../../../services/auth.service";
+import Seven from "../../../assets/images/seven.jpg";
 function Home() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [gas, setGas] = useState("");
-  const [petrol, setPetrol] = useState("");
+  // const [petrol, setPetrol] = useState("");
   const navigate = useNavigate();
   const fuelStation = AuthService.getCurrentFuelStation();
   const [pointer, setPointer] = useState(null);
   const [name, setName] = useState(null);
 
-
-  const getResposne = async () => {
+  const getResponse = async () => {
     try {
       await authService.getFuelStationByID(fuelStation.stationId).then(
         (response) => {
           console.log(response);
           setName(response.data.name);
           setPointer(response.data.location);
-          setPetrol(response.data.quantity.petrol.quantity);
+          // setPetrol(response.data.quantity.petrol.quantity);
           setGas(response.data.quantity.gas.quantity);
         },
         (error) => {
@@ -36,12 +36,11 @@ function Home() {
       console.log(err);
     }
   };
-  
 
   useEffect(() => {
-    getResposne();
+    getResponse();
   }, []);
-  
+
   useEffect(() => {
     if (!fuelStation) {
       navigate("/seller/auth/login");
@@ -52,7 +51,7 @@ function Home() {
     <div
       className="w-screen h-screen flex items-center justify-center"
       style={{
-        backgroundImage: `linear-gradient(45deg,rgba(0,0,0, 0.75),rgba(0,0,0, 0.75)),url(${LoginLight})`,
+        backgroundImage: `linear-gradient(45deg,rgba(0,0,0, 0.75),rgba(0,0,0, 0.75)),url(${Seven})`,
         backgroundPosition: `50% 50%`,
         backgroundSize: `cover`,
         backgroundRepeat: "no-repeat",
@@ -70,14 +69,14 @@ function Home() {
         </div>
         <div className="flex flex-row justify-evenly items-center  gap-5 lg:flex-row flex-wrap lg:gap-10 lg:w-[30%] ">
           <div className="text-white text-center text-[54px] flex flex-row justify-center items-center gap-3  whitespace-break-spaces font-sans  lg:text-[96px] md:text-[74px] ">
-            <BsFuelPump className="text-[#fe6f2b]"/>
+            <BsFuelPump className="text-[#fe6f2b]" />
             <h1>{name}</h1>
           </div>
           <div className="flex flex-row justify-evenly items-center  gap-3 lg:flex-row flex-wrap lg:gap-5 lg:w-[100%] ">
-            <div className="bg-gray-800 p-5 rounded-lg shadow text-white">
+            {/* <div className="bg-gray-800 p-5 rounded-lg shadow text-white">
               <h2 className="text-xl font-bold">Petrol Quantity</h2>
               <p>{petrol} liters</p>
-            </div>
+            </div> */}
             <div className="bg-gray-800 p-5 rounded-lg shadow text-white">
               <h2 className="text-xl font-bold">Gas Quantity</h2>
               <p>{gas} Cylinders</p>

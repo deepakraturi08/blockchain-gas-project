@@ -37,7 +37,7 @@ function ListOrderHistory({ order, setLoading }) {
     } catch (err) {
       console.log(err);
     }
-  }
+  };
 
   const cancelOrder = async () => {
     try {
@@ -53,7 +53,7 @@ function ListOrderHistory({ order, setLoading }) {
     } catch (err) {
       console.log(err);
     }
-  }
+  };
 
   const deliveryOrder = async () => {
     try {
@@ -69,7 +69,7 @@ function ListOrderHistory({ order, setLoading }) {
     } catch (err) {
       console.log(err);
     }
-  }
+  };
 
   const acceptOrder = async () => {
     try {
@@ -85,7 +85,7 @@ function ListOrderHistory({ order, setLoading }) {
     } catch (err) {
       console.log(err);
     }
-  }
+  };
 
   const renderedUserInfo = userInfo ? (
     <>
@@ -104,41 +104,61 @@ function ListOrderHistory({ order, setLoading }) {
   const renderedOrderInfo = (
     <>
       <p className="text-grey-dark font-thin text-sm leading-normal text-white">
-        Fuel : <br />
-        {(fuel.petrol) ? (
+        {/* Fuel : <br /> */}
+        {/* {(fuel.petrol) ? (
           <>
             Petrol : 
             Price  : {fuel.petrol.price}<br/>
             Quantity:{fuel.petrol.quantity}
           </>
-        ) : null}
-        {(fuel.gas) ? (
+        ) : null} */}
+        {fuel.gas ? (
           <>
             Gas : {/* Change "Diesel" to "Gas" */}
-            Price  : {fuel.gas.price}<br/>
+            Price : {fuel.gas.price}
+            <br />
             Quantity:{fuel.gas.quantity}
           </>
         ) : null}
         <br />
       </p>
       <p className="text-grey-dark font-thin text-sm leading-normal text-white">
-        Cost : Rs-{(method.cash) ? method.cash : method.online.amount}
+        Cost : Rs-{method.cash ? method.cash : method.online.amount}
         <br />
       </p>
-      <p className={` ${(!isAccepted.status && !isDelivered.status && !isCanceled.status) ? " text-yellow-500 font-bold " : "hidden" }`}>
+      <p
+        className={` ${
+          !isAccepted.status && !isDelivered.status && !isCanceled.status
+            ? " text-yellow-500 font-bold "
+            : "hidden"
+        }`}
+      >
         Status : Pending
       </p>
-      <p className={` ${(isAccepted.status && !isDelivered.status) ? " text-[#32CD32] font-bold " : "hidden" }`}>
+      <p
+        className={` ${
+          isAccepted.status && !isDelivered.status
+            ? " text-[#32CD32] font-bold "
+            : "hidden"
+        }`}
+      >
         Status : On The Way
       </p>
-      <p className={` ${(isCanceled.status) ? " text-red-900 font-bold " : "hidden" }`}>
+      <p
+        className={` ${
+          isCanceled.status ? " text-red-900 font-bold " : "hidden"
+        }`}
+      >
         Status : Canceled
       </p>
-      <p className={` ${(isDelivered.status) ? " text-[#32CD32] font-bold " : "hidden" }`}>
+      <p
+        className={` ${
+          isDelivered.status ? " text-[#32CD32] font-bold " : "hidden"
+        }`}
+      >
         Status : Delivered
       </p>
-      <p className="text-grey-dark font-thin text-sm leading-normal text-white">
-      </p>
+      <p className="text-grey-dark font-thin text-sm leading-normal text-white"></p>
     </>
   );
 

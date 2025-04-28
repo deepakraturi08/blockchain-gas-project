@@ -9,7 +9,7 @@ import ListOrder from "./ListOrder";
 import { AiOutlineShoppingCart } from "react-icons/ai";
 import { TbTruckDelivery } from "react-icons/tb";
 import { toast } from "react-toastify";
-
+import Five from "../../../assets/images/five.jpg";
 function Order() {
   const [orders, setOrders] = useState(null);
   const navigate = useNavigate();
@@ -19,7 +19,7 @@ function Order() {
 
   useEffect(() => {
     if (!fuelStation) {
-      navigate('/home');
+      navigate("/home");
     }
     console.log("FuelStation", fuelStation.stationId);
   }, [fuelStation]);
@@ -38,7 +38,7 @@ function Order() {
     } catch (err) {
       console.log(err);
     }
-  }
+  };
 
   useEffect(() => {
     setCountOnWayOrders(0);
@@ -51,39 +51,42 @@ function Order() {
 
   const incrementCount = () => {
     setCountOnWayOrders(countOnWayOrders + 1);
-  }
+  };
 
-  const renderedOrders = (orders) ? orders.filter((element) => {
-    const { isAccepted, isCanceled, isDelivered } = element;
-    console.log(element);
-    if (isCanceled.status || isDelivered.status) {
-      return null;
-    }
-    return element;
-  }).map((element) => {
-    const { isAccepted, isCanceled, isDelivered } = element;
-    return (
-      <ListOrder order={element} setLoading={setLoading} />
-    )
-  }) : null;
+  const renderedOrders = orders
+    ? orders
+        .filter((element) => {
+          const { isAccepted, isCanceled, isDelivered } = element;
+          console.log(element);
+          if (isCanceled.status || isDelivered.status) {
+            return null;
+          }
+          return element;
+        })
+        .map((element) => {
+          const { isAccepted, isCanceled, isDelivered } = element;
+          return <ListOrder order={element} setLoading={setLoading} />;
+        })
+    : null;
 
   useEffect(() => {
     if (renderedOrders && renderedOrders.length === 0) {
       toast.warning("There are No Order");
-      navigate('../');
+      navigate("../");
     }
   }, [renderedOrders]);
 
-  const renderedIcon = (countOnWayOrders) ?
+  const renderedIcon = countOnWayOrders ? (
     <TbTruckDelivery className="" />
-    :
+  ) : (
     <AiOutlineShoppingCart className="text-white" />
+  );
 
   return (
     <div
       className="w-screen h-screen flex flex-col justify-around items-center lg:md:flex-row"
       style={{
-        backgroundImage: `linear-gradient(45deg,rgba(0,0,0, 0.75),rgba(0,0,0, 0.75)),url(${LoginLight})`,
+        backgroundImage: `linear-gradient(45deg,rgba(0,0,0, 0.75),rgba(0,0,0, 0.75)),url(${Five})`,
         backgroundPosition: `50% 50%`,
         backgroundSize: `cover`,
         backgroundRepeat: "no-repeat",

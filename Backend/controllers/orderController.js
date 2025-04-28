@@ -255,9 +255,6 @@ export const deliveryOrder = async (req, res) => {
         { _id: order.stationId },
         {
           $inc: {
-            "quantity.petrol.quantity": order.fuel.petrol
-              ? -order.fuel.petrol.quantity
-              : 0,
             "quantity.gas.quantity": order.fuel.gas
               ? -order.fuel.gas.quantity
               : 0,

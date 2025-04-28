@@ -7,6 +7,7 @@ import { getDistance } from "geolib";
 import { BsFuelPump } from "react-icons/bs";
 import BookPreview from "../../modal/BookPreview";
 import { toast } from "react-toastify";
+import Seven from "../../../assets/images/seven.jpg";
 
 function BookOrder() {
   const { id } = useParams();
@@ -163,13 +164,13 @@ function BookOrder() {
         <BsFuelPump className="text-[#fe6f2b] text-[54px]" />
         <h1 className="text-center text-[54px] font-bold">{station.name}</h1>
       </div>
-      <div className="flex flex-row items-center">
+      {/* <div className="flex flex-row items-center">
         <label className="text-[24px] font-semibold">Petrol: </label>
         <p className="text-[24px] font-thin">
           {station.quantity.petrol.price} ₹/L (Total Quantity :{" "}
           {station.quantity.petrol.quantity} L)
         </p>
-      </div>
+      </div> */}
       <div className="flex flex-row items-center">
         <label className="text-[24px] font-semibold">Gas: </label>
         <p className="text-[24px] font-thin">
@@ -183,7 +184,7 @@ function BookOrder() {
     <div
       className="w-[screen] min-h-screen flex flex-col justify-around items-center lg:md:flex-row"
       style={{
-        backgroundImage: `linear-gradient(45deg,rgba(0,0,0, 0.75),rgba(0,0,0, 0.75)),url(${LoginLight})`,
+        backgroundImage: `linear-gradient(45deg,rgba(0,0,0, 0.75),rgba(0,0,0, 0.75)),url(${Seven})`,
         backgroundPosition: `50% 50%`,
         backgroundSize: `cover`,
         backgroundRepeat: "no-repeat",
@@ -230,7 +231,7 @@ function BookOrder() {
               ) : null}
             </div>
           </div>
-          <div className="gap-3 md:flex md:items-center mb-6 ">
+          {/* <div className="gap-3 md:flex md:items-center mb-6 ">
             <div className="">
               <label
                 className="block text-white font-bold md:text-right mb-1 md:mb-0 pr-4"
@@ -268,7 +269,7 @@ function BookOrder() {
                 placeholder="Price"
               />
             </div>
-          </div>
+          </div> */}
           <div className="gap-3 md:flex md:items-center mb-6 ">
             <div className="">
               <label

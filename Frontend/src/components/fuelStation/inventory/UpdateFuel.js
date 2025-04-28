@@ -4,13 +4,13 @@ import { MdOutlineInventory2 } from "react-icons/md";
 import { useEffect, useState } from "react";
 import { toast } from "react-toastify";
 import authService from "../../../services/auth.service";
-
+import Six from "../../../assets/images/six.jpg";
 function UpdateFuel() {
   const [petrolQuantity, setPetrolQuantity] = useState(null);
   const [petrolPrice, setPetrolPrice] = useState(null);
 
   const [gasQuantity, setGasQuantity] = useState(null);
-  const [gasPrice, setGasPrice] = useState(null); 
+  const [gasPrice, setGasPrice] = useState(null);
 
   const navigate = useNavigate();
   const fuelStation = authService.getCurrentFuelStation();
@@ -53,7 +53,7 @@ function UpdateFuel() {
     } catch (err) {
       console.log(err);
     }
-  }
+  };
 
   const validation = () => {
     if (petrolPrice !== "" && petrolQuantity === "") {
@@ -76,7 +76,7 @@ function UpdateFuel() {
       return false;
     }
     return true;
-  }
+  };
 
   const onHandleSubmit = (e) => {
     e.preventDefault();
@@ -84,7 +84,7 @@ function UpdateFuel() {
     if (isValid) {
       updateInventory();
     }
-  }
+  };
 
   useEffect(() => {}, [petrolPrice, petrolQuantity, gasPrice, gasQuantity]);
 
@@ -92,7 +92,7 @@ function UpdateFuel() {
     <div
       className="w-screen h-screen flex flex-col justify-around items-center lg:md:flex-row"
       style={{
-        backgroundImage: `linear-gradient(45deg,rgba(0,0,0, 0.75),rgba(0,0,0, 0.75)),url(${LoginLight})`,
+        backgroundImage: `linear-gradient(45deg,rgba(0,0,0, 0.75),rgba(0,0,0, 0.75)),url(${Six})`,
         backgroundPosition: `50% 50%`,
         backgroundSize: `cover`,
         backgroundRepeat: "no-repeat",
@@ -108,7 +108,7 @@ function UpdateFuel() {
           <p>Please Fill in the new quantity of Petrol and Gas</p>
         </div>
         <form className="w-full max-w-sm" onSubmit={onHandleSubmit}>
-          <div className="gap-3 md:flex md:items-center mb-6">
+          {/* <div className="gap-3 md:flex md:items-center mb-6">
             <div className="mb-3 lg:mb-0">
               <label
                 className="block text-white font-bold md:text-right mb-1 md:mb-0 pr-4"
@@ -141,7 +141,7 @@ function UpdateFuel() {
                 placeholder="Price"
               />
             </div>
-          </div>
+          </div> */}
           <div className="gap-3 md:flex md:items-center mb-6">
             <div className="mb-3 lg:mb-0">
               <label

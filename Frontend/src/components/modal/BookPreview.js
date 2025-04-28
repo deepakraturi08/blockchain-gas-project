@@ -55,12 +55,12 @@ function BookPreview({
               <div className="flex flex-col h-full md:w-1/2 items-center text-[#fe6f2b] text-[36px] ">
                 <h1> Bill </h1>
                 <div className="place-self-start">
-                  <div className="text-[24px] text-black font-semibold">
+                  {/* <div className="text-[24px] text-black font-semibold">
                     <p>Petrol : </p>
                     <p className="text-[24px] font-thin">
                       Total : {petrolPrice} ₹/L ( Quantity: {petrolQuantity} L)
                     </p>
-                  </div>
+                  </div> */}
                   <div className="text-[24px] text-black font-semibold">
                     <p>Gas : </p>
                     <p className="text-[24px] font-thin">

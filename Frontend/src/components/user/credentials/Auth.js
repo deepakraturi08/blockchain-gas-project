@@ -10,6 +10,7 @@ import {
 } from "react-icons/ai";
 import authService from "../../../services/auth.service";
 import { toast } from "react-toastify";
+
 function Auth() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
