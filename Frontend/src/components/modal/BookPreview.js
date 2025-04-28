@@ -4,6 +4,7 @@ import { BsFuelPump } from "react-icons/bs";
 import authService from "../../services/auth.service";
 import { getDistance } from "geolib";
 import OnlineScanner from "../../assets/images/qr.jpg";
+import CryptoPayment from "../wallet/CryptoPayment";
 
 function BookPreview({
   order,
@@ -86,7 +87,7 @@ function BookPreview({
                       className="text-[#fe6f2b] text-[36px] font-bold md:text-left mb-1 md:mb-0 pr-4"
                       htmlFor="inline-diesel"
                     >
-                      Method
+                      Payment Method
                     </label>
                   </div>
                   <div className="mb-3 w-full flex flex-col gap-5 lg:mb-0">
@@ -103,6 +104,7 @@ function BookPreview({
                                 amount: totalPrice,
                               },
                               cash: undefined, // Unselect the "Cash" option
+                              crypto: undefined, // Unselect the "Crypto" option
                             });
                           }
                         }}
@@ -110,7 +112,7 @@ function BookPreview({
                       />
                       <label
                         htmlFor="online"
-                        className="w-full py-4 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                        className="w-full py-4 ml-2 text-sm font-medium"
                       >
                         Online
                       </label>
@@ -126,6 +128,7 @@ function BookPreview({
                             setMethod({
                               cash: totalPrice,
                               online: undefined, // Unselect the "Online" option
+                              crypto: undefined, // Unselect the "Crypto" option
                             });
                           }
                         }}
@@ -133,15 +136,67 @@ function BookPreview({
                       />
                       <label
                         htmlFor="cash"
-                        className="w-full py-4 ml-2 text-sm font-medium text-gray-900 dark:text-gray-300"
+                        className="w-full py-4 ml-2 text-sm font-medium "
                       >
                         Cash
                       </label>
                     </div>
+                    <div className="flex items-center pl-4 border rounded border-[#F59337]">
+                      <input
+                        id="crypto"
+                        type="radio"
+                        checked={method.crypto ? true : false}
+                        name="method"
+                        onChange={() =>
+                          setMethod({
+                            crypto: {
+                              amount: totalPrice,
+                              currency: "ETH",
+                            },
+                            cash: undefined, // Unselect the "Cash" option
+                            online: undefined, // Unselect the "Online" option
+                          })
+                        }
+                        className="w-4 h-4 text-blue-600 bg-gray-100 border-[#F59337] focus:ring-blue-500"
+                      />
+                      <label
+                        htmlFor="crypto"
+                        className="w-full py-4 ml-2 text-sm font-medium"
+                      >
+                        Crypto Payment (ETH)
+                      </label>
+                    </div>
                   </div>
+                  {method.crypto && (
+                    <CryptoPayment
+                      amount={totalPrice}
+                      onSuccess={(txHash) => {
+                        // Update order with blockchain details
+                        const updatedMethod = {
+                          crypto: {
+                            ...method.crypto,
+                            txHash,
+                            status: "confirmed",
+                          },
+                        };
+                        setMethod(updatedMethod);
+                        setOnProceed(); // Continue with order submission
+                      }}
+                      onClose={() =>
+                        setMethod({
+                          cash: totalPrice,
+                          crypto: undefined,
+                          online: undefined,
+                        })
+                      } // Close the modal and reset method
+                    />
+                  )}
                 </div>
               </div>
-              <div className="flex md:w-1/2 flex-col h-full">
+              <div
+                className="flex md:w-1/2 flex-col h-full"
+                style={{ marginTop: "3rem" }}
+              >
                 <div className="relative p-6 flex h-[100%] flex-col text-black">
                   <div className="flex flex-col lg:flex-row h-full justify-center items-center gap-3 p-3">
                     <BsFuelPump className="text-[#fe6f2b] text-[36px]" />

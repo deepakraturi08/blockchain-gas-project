@@ -113,8 +113,9 @@ function BookOrder() {
     setShowOrderModal(false);
     if (method.online) {
       authService.displayRazorpay(totalPrice, setTransactionData);
-    } else {
+    } else if (method.cash) {
       postOrder(method);
+    } else {
     }
   };
   const postOrder = async (method) => {

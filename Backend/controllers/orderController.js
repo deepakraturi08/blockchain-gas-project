@@ -1,6 +1,27 @@
 import Order from "../models/order.js";
 import Station from "../models/fuelStation.js";
 
+// Add to your order controller
+const verifyBlockchainPayment = async (txHash) => {
+  const provider = new ethers.JsonRpcProvider(process.env.BLOCKCHAIN_URL);
+  const receipt = await provider.getTransactionReceipt(txHash);
+
+  return {
+    success: receipt.status === 1,
+    blockNumber: receipt.blockNumber,
+    from: receipt.from,
+  };
+};
+
+// In your order creation logic
+// if (method.crypto) {
+//   const verification = await verifyBlockchainPayment(method.crypto.txHash);
+//   if (!verification.success) {
+//     throw new Error("Blockchain payment verification failed");
+//   }
+//   order.blockchainTx = method.crypto.txHash;
+// }
+
 export const addOrder = async (req, res) => {
   const { address, fuel, method, userId, stationId } = req.body;
 
