@@ -41,6 +41,7 @@ function BookPreview({
   useEffect(() => {
     setMethod({
       cash: totalPrice,
+      crypto: totalPrice,
     });
   }, [totalPrice]);
 
@@ -149,10 +150,7 @@ function BookPreview({
                         name="method"
                         onChange={() =>
                           setMethod({
-                            crypto: {
-                              amount: totalPrice,
-                              currency: "ETH",
-                            },
+                            crypto: totalPrice,
                             cash: undefined, // Unselect the "Cash" option
                             online: undefined, // Unselect the "Online" option
                           })
@@ -178,6 +176,8 @@ function BookPreview({
                             txHash,
                             status: "confirmed",
                           },
+                          cash: undefined, // Unselect the "Cash" option
+                          online: undefined, // Unselect the "Online" option
                         };
                         setMethod(updatedMethod);
                         setOnProceed(); // Continue with order submission

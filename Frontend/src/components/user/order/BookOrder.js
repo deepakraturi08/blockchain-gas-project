@@ -92,6 +92,7 @@ function BookOrder() {
     getResponse();
     setMethod({
       cash: totalPrice,
+      crypto: totalPrice,
     });
   }, []);
 
@@ -117,6 +118,7 @@ function BookOrder() {
     } else if (method.cash) {
       postOrder(method);
     } else {
+      postOrder(method);
     }
   };
   const postOrder = async (method) => {

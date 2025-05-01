@@ -105,7 +105,7 @@ function UpdateFuel() {
       <div className="w-[100%] text-white  h-[100%] justify-center gap-5 lg:w-1/2 items-center flex flex-col flex-wrap overflow-scroll">
         <div className="header">
           <h1 className="text-center text-[54px]">Update Quantity</h1>
-          <p>Please Fill in the new quantity of Petrol and Gas</p>
+          <p>Please Fill in the new quantity and price per cylinder for Gas</p>
         </div>
         <form className="w-full max-w-sm" onSubmit={onHandleSubmit}>
           {/* <div className="gap-3 md:flex md:items-center mb-6">

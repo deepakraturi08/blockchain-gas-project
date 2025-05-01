@@ -123,7 +123,7 @@ function ListOrderHistory({ order, setLoading }) {
         <br />
       </p>
       <p className="text-grey-dark font-thin text-sm leading-normal text-white">
-        Cost : Rs-{method.cash ? method.cash : method.online.amount}
+        Cost : Rs-{method.cash ? method.cash : method.crypto}
         <br />
       </p>
       <p
